@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <style>
+        h2 { text-align: center }
+        p { text-align: center }
+    </style>
+</head>
+
+<body>
+    <h2>Aktualna liczba ludzi:</h2>
+    <p id="counter"></p>
+
+    <script>
+
+        function updateCounter() {
+            fetch('http://localhost:3000/number')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('counter').textContent = data;
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+        }
+
+        $(document).ready(function() {
+           updateCounter();
+           setInterval(updateCounter, 10);
+        });
+
+    </script>
+</body>
+</html>
+
